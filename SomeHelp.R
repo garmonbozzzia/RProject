@@ -30,3 +30,14 @@ list.files(dir)
 list.files(file.path(dir,"extdata")) #external data is in this directory
 filename <- file.path(dir,"extdata/femaleMiceWeights.csv")
 dat <- read.csv(filename)
+##
+install.packages("dplyr")
+library(dplyr) 
+chow <- filter(dat, Diet=="chow")
+head(chow)
+chowVals <- select(chow,Bodyweight)
+head(chowVals)
+chowVals <- filter(dat, Diet=="chow") %>% select(Bodyweight)
+chowVals <- filter(dat, Diet=="chow") %>% select(Bodyweight) %>% unlist
+class( chowVals )
+chowVals <- dat[ dat$Diet=="chow", colnames(dat)=="Bodyweight"]
